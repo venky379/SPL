@@ -1,0 +1,53 @@
+{% extends "base1.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="row justify-content-center h-100">
+	<div class="col-2"style="background: white;">
+		<h1>Player List</h1>
+		<table class="table table-striped"style="overflow-y: scroll;height: 100%">
+			<thead>
+			{% for i in usernames %}
+				
+			      <tr>
+			        <th><a href="/user_edit/{{team_id.id}}/{{i.id}}">
+			        {% if i.Wicket_keeper and i.Captain  %} {{ forloop.counter }}. {{i.Username|title}}(C)(WK)
+			        {% elif i.Captain %} {{ forloop.counter }}. {{i.Username|title}}(C) 
+				    {% elif i.Wicket_keeper %} {{ forloop.counter }}. {{i.Username|title}}(WK)
+				     {% else %} {{ forloop.counter }}. {{i.Username|title}} {%endif%}</a></th>
+			      </tr>
+			{%endfor%}
+			    </thead> 
+		</table>
+		<div style="text-align:right;color:red">Entry fee = Rs {{team_id.Team_fee}} /- </div>
+		
+	</div>
+	<div class="col-10">
+		<div class="row" style="background: red">
+	    	<div class="col-12">
+	    		<h1 class="mt-2"style="text-align: center;">Surakunte Circket Sports</h1>
+			</div>
+    	</div>
+		<div style="padding-top: 30;padding-left: 200;padding-right: 200;">
+			<div class="row">
+				<div class="col-10">
+				<a href="/team_register"class="btn btn-success">&laquo; Back</a></div>
+				<div class="col-2">
+				<a href="/user_register/{{team_id.id}}"class="btn btn-success"style="margin-right: 100">&#43; Create User</a></div>
+			</div>
+			<div style="font-size: 34;text-align: center;color: #D35110;">New User</div>
+			<form method="POST" class="form-group"style="padding-top: 60">
+				{% csrf_token %}
+				<div class="row">
+					<div class="col-6">{{ form.play_to|as_crispy_field }}</div>
+					<div class="col-6">{{ form.Username|as_crispy_field }}</div>
+					<div class="col-6">{{ form.AadhaarNo|as_crispy_field }}</div>
+					<div class="col-6">{{ form.Age|as_crispy_field }}</div>
+					<div class="col-1">{{ form.Captain|as_crispy_field }}</div>
+					<div class="col-3">{{ form.Wicket_keeper|as_crispy_field }}</div>
+				</div>
+				<button type="submit" class="btn btn-success">Register</button>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
