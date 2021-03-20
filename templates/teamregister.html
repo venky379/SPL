@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="row justify-content-center h-100">
-	<div class="col-2"style="background: white;overflow-y: scroll;height: 100%">
+	<div class="col-md-2 col-lg-2 col-sm-12"style="background: white;overflow-y: scroll;">
 		<h1>Teams List</h1>
 		<table class="table table-striped">
 		{% for i in teamnames %}
@@ -16,13 +16,13 @@
 	</table>
 	<div style="text-align:right;color:red">Total Entry Fee = Rs {{total_fee}} /- </div>
 	</div>
-	<div class="col-10">
+	<div class="col-md-10 col-lg-10 col-sm-12">
 		<div class="row" style="background: red">
 	    	<div class="col-12">
 	    		<h1 class="mt-2"style="text-align: center;">Surakunte Circket Sports</h1>
 			</div>
     	</div>
-		<div style="padding-top: 30;padding-left: 200;padding-right: 200;">
+		<div class="form_ui">
 			<div class="row">
 				<div class="col-10">
 				<a href="/"class="btn btn-success">&laquo; Back</a></div>
@@ -30,7 +30,7 @@
 				<a href="/team_register"class="btn btn-success">&#43; Create User</a></div>
 			</div>
 			<div style="font-size: 34;text-align: center;color: #D35110;">New Team</div>
-			<form method="POST" class="form-group"style="padding-top: 60">
+			<form method="POST" class="form-group padding60">
 				{% if status %}    
 		            <div class="alert alert-danger">
 		                <strong>{{ status|escape }}</strong>
@@ -45,9 +45,9 @@
 				{% endif %}
 				{% csrf_token %}
 				<div class="row">
-					<div class="col-12">{{ form.Team_title|as_crispy_field }}</div>
-					<div class="col-6">{{ form.Team_fee|as_crispy_field }}</div>
-					<div class="col-6">{{ form.Captain_No|as_crispy_field }}</div>
+					<div class="col-sm-12 col-md-12 col-md-lg-12">{{ form.Team_title|as_crispy_field }}</div>
+					<div class="col-sm-12 col-md-6 col-md-lg-6">{{ form.Team_fee|as_crispy_field }}</div>
+					<div class="col-sm-12 col-md-6 col-md-lg-6">{{ form.Captain_No|as_crispy_field }}</div>
 				</div>
 				<button type="submit" class="btn btn-success">Register</button>
 			</form>
