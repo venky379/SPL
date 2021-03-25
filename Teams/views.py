@@ -10,7 +10,14 @@ def home(response):
     total_fee = 0
     for i in team_qury:
         total_fee += int(i.Team_fee)
-    return render(response, "home.html", {"total_fee":total_fee})
+    return render(response, "home.html", {"team_qury":team_qury,"total_fee":total_fee})
+def feesummary(response):
+    team_qury = TeamRegister.objects.all()
+    total_fee = 0
+    for i in team_qury:
+        total_fee += int(i.Team_fee)
+    return render(response, "feesummary.html", {"team_qury":team_qury,"total_fee":total_fee})
+
 
 def team_register(response):
     form = TeamRegisterForm()
@@ -69,7 +76,7 @@ def user_edit(response,team_id, user_id):
         #     form = RegisterForm()
         return render(response, "userregister.html", {"form":form,"usernames":usernames,"team_id":team_inst})
     else:
-        return render(response, "userregister.html", {"form":form,"usernames":usernames,"team_id":team_inst})
+        return render(response, "userregister.html", {"form":form,"usernames":usernames,"team_id":team_inst,"user_inst":user_inst})
 
 def team_edit(response,team_id):
     team_inst = TeamRegister.objects.get(id = team_id)
@@ -87,4 +94,4 @@ def team_edit(response,team_id):
         return redirect("/team_register")
         return render(response, "teamregister.html", {"form":form,"teamnames":teamnames,'total_fee':total_fee})
     else:
-        return render(response, "teamregister.html", {"form":form,"teamnames":teamnames,'total_fee':total_fee})
+        return render(response, "teamregister.html", {"form":form,"teamnames":teamnames,'total_fee':total_fee,"team_inst":team_inst})

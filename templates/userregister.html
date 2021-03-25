@@ -1,13 +1,11 @@
 {% extends "base1.html" %}
 {% load crispy_forms_tags %}
-{% block content %}
-<div class="row justify-content-center h-100">
-	<div class="col-md-2 col-lg-2 col-sm-12"style="background: white;">
+
+	{% block list %}
 		<h1>Player List</h1>
-		<table class="table table-striped"style="overflow-y: scroll;height: 100%">
+		<table class="table table-striped">
 			<thead>
 			{% for i in usernames %}
-			
 			      <tr>
 			        <th><a href="/user_edit/{{team_id.id}}/{{i.id}}">
 			        {% if i.Wicket_keeper and i.Captain  %} {{ forloop.counter }}. {{i.Username|title}}(C)(WK)
@@ -18,36 +16,34 @@
 			{%endfor%}
 			    </thead> 
 		</table>
-		<div style="text-align:right;color:red">Entry fee = Rs {{team_id.Team_fee}} /- </div>
-		
-	</div>
-	<div class="col-md-10 col-lg-10 col-sm-12">
-		<div class="row" style="background: red">
-	    	<div class="col-12">
-	    		<h1 class="mt-2"style="text-align: center;">Surakunte Circket Sports</h1>
-			</div>
-    	</div>
-		<div class="form_ui">
+	{% endblock %}
+	{% block form %}
+		<div class="form_ui"style="padding-top: 20">
 			<div class="row">
-				<div class="col-10 ">
-				<a href="/team_register"class="btn btn-success">&laquo; Back</a></div>
-				<div class="col-2">
-				<a href="/user_register/{{team_id.id}}"class="btn btn-success"style="margin-right: 100">&#43; Create User</a></div>
+				<div class="col-8 ">
+					<a href="/team_register"class="btn btn-success">&laquo; Back</a></div>
+				<div class="col-4"style="text-align: right">
+					<a href="/user_register/{{team_id.id}}"class="btn btn-success">&#43; Create User</a>
+				</div>
 			</div>
 			<div style="font-size: 34;text-align: center;color: #D35110;">New User</div>
 			<form method="POST" class="form-group padding60">
 				{% csrf_token %}
 				<div class="row">
-					<div class="col-md-6 col-lg-6 col-sm-12">{{ form.play_to|as_crispy_field }}</div>
-					<div class="col-md-6 col-lg-6 col-sm-12">{{ form.Username|as_crispy_field }}</div>
-					<div class="col-md-6 col-lg-6 col-sm-12">{{ form.AadhaarNo|as_crispy_field }}</div>
-					<div class="col-md-6 col-lg-6 col-sm-12">{{ form.Age|as_crispy_field }}</div>
-					<div class="col-md-1 col-lg-1 col-sm-12">{{ form.Captain|as_crispy_field }}</div>
-					<div class="col-md-3 col-lg-3 col-sm-12">{{ form.Wicket_keeper|as_crispy_field }}</div>
+					<div class="col-md-6 col-lg-6 col-sm-12">Team Name :{{ form.play_to|as_crispy_field }}</div>
+					<div class="col-md-6 col-lg-6 col-sm-12">Player Name* :{{ form.Username|as_crispy_field }}</div>
+					<div class="col-md-6 col-lg-6 col-sm-12">Aadhar No* :{{ form.AadhaarNo|as_crispy_field }}</div>
+					<div class="col-md-6 col-lg-6 col-sm-12">Age :{{ form.Age|as_crispy_field }}</div>
+					<div class="col-md-2 col-lg-2 col-sm-12">Captain :{{ form.Captain|as_crispy_field }}</div>
+					<div class="col-md-4 col-lg-4 col-sm-12">Wicket Keeper :{{ form.Wicket_keeper|as_crispy_field }}</div>
 				</div>
-				<button type="submit" class="btn btn-success">Register</button>
+				<button type="submit" class="btn btn-success">
+					{% if user_inst %}
+						Update
+					{%else%}
+						Register
+					{%endif%}
+			</button>
 			</form>
 		</div>
-	</div>
-</div>
-{% endblock %}
+	{% endblock %}

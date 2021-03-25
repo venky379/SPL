@@ -1,0 +1,29 @@
+{% extends "base1.html" %}
+{% load crispy_forms_tags %}
+{% block list %}
+<div style="font-size: 24">Total Enter Fee: {{total_fee}} </div>
+{% endblock %}
+{% block form %}
+		<h1>Teams List</h1>
+			<table class="table table-striped" style="color: #007bff">
+				<thead>
+			      <tr>
+			        <th>Sl no.</th>
+			        <th>Team Name</th>
+			        <th>Captain Phone No</th>
+			        <th>Enter Fee</th>
+			      </tr>
+			    </thead> 
+			    <tbody>
+					{% for i in team_qury %}
+					    <tr>
+					        <th><a>{{ forloop.counter }}</th>
+					        <th><a href="/user_register/{{i.id}}">{{i.Team_title|title}}</a></th>
+					        <th>{{i.Captain_No}}</th>
+					        <th>Rs. {{i.Team_fee}}</th>
+					     </tr>
+					{%endfor%}
+			    </tbody>
+			</table>
+		
+{% endblock %}

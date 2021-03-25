@@ -27,10 +27,26 @@
 </style>
 <body>
     <div class="container-fluid">
-   
-          {% block content %}
-          {% endblock %}  
-    </div>
+      <div class="row" style="background: #abb2b9 ">
+        <div class="col-12">
+          <a href="/"style="color: black"><h1 class="mt-2"style="text-align: center;">SPL - Soorakunte Premier Leage</h1></a>
+        </div>
+      </div>
+      <div class="row h-100">
+        <div class="col-md-2 col-sm-12"style="background: #e5e7e9 ">
+          {% block list %}
 
+          {% endblock %}
+        </div>
+        <div class="col-md-10 col-sm-12">
+          {% block form %}
+
+          {% endblock %}
+
+        </div>
+
+      </div>
+             
+    </div>
 </body>
 </html>
