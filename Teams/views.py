@@ -81,10 +81,10 @@ def user_edit(response,team_id, user_id):
     usernames = UserProfile.objects.filter(play_to__id = team_id)
     if response.method == "POST":
         form = RegisterForm(response.POST)
-        user_inst.Captain=response.POST.get('play_to')
-        user_inst.Captain=response.POST.get('Username')
-        user_inst.Captain=response.POST.get('AadhaarNo')
-        user_inst.Captain=response.POST.get('Age')
+        # user_inst.play_to=response.POST.get('play_to')
+        user_inst.Username=response.POST.get('Username')
+        user_inst.AadhaarNo=response.POST.get('AadhaarNo')
+        user_inst.Age=response.POST.get('Age')
         if response.POST.get('Captain'):
             user_inst.Captain= True 
         else:
