@@ -1,24 +1,53 @@
 {% extends "base1.html" %}
 {% load crispy_forms_tags %}
 {% block list %}
-		<h1>Teams List</h1>
+		<h1>Not Scheduled Teams</h1>
 		<table class="table table-striped">
-		{% for i in teamnames %}
+		{% for i in not_scheduled_list %}
 			    <thead>
 			      <tr>
-			        <th>{{ forloop.counter }}. {{i.Team_title|title}}</th>
+			        <th>{{ forloop.counter }}. {{i|title}}</th>
 			      </tr>
 			    </thead>  
 		{%endfor%}
 	</table>
 {% endblock %}
 {% block form %}
-<div class="row">
-	<div class="col-12"style="text-align: right;padding-right: 20;margin-top: 10">
-		<a href="#"class="btn btn-success">&#43; Create User</a>
+<h1 style='padding-top: 20'>Create Schedule</h1>
+<form method="POST"style='padding-top: 20'>
+	{% csrf_token %}
+	<div class="row">
+		<div class="col-md-3 col-lg-3 col-sm-12">
+			<div>Team1</div>
+			<select name="team1" id="team1"style='width: 300;height: 40'>
+			    <option value="volvo"selected>Select Team</option>
+			    {% for i in not_scheduled_list%}
+				    <option value={{i}}>{{i}}</option>
+			    {%endfor%}
+			</select>
+		</div>
+		<div class="col-md-3 col-lg-3 col-sm-12">
+			<div>Team2</div>
+			<select name="team2" id="team2"style='width: 300;height: 40'>
+			    <option value="volvo"selected>Select Team</option>
+			    {% for i in not_scheduled_list%}
+				    <option value={{i}}>{{i}}</option>
+			    {%endfor%}
+			</select>
+
+			</select>
+		</div>
+		<div class="col-md-3 col-lg-3 col-sm-12">
+			<div>Timings</div>
+			<input name="datetime" id="datetime" type="datetime-local"style='width: 300;height: 40'>
+		</div>
+		<div class="col-md-3 col-lg-3 col-sm-12"style="padding-top:30">
+			<input type="submit"class="btn btn-success">
+		</div>
 	</div>
-</div>
-<h1>Schedule</h1>
+
+</form>
+<h1>Scheduled List</h1>
 		<table class="table table-striped">
 			    <thead>
 			      <tr>
@@ -26,6 +55,7 @@
 			        <th>Vs</th>
 			        <th>Date and Time</th>
 			        <th>Winning Status</th>
+			        <th>Actions</th>
 			      </tr>
 			    </thead>  
 		<tbody>
@@ -33,8 +63,9 @@
 			<tr>
 				<td>{{ forloop.counter }}</td>
 				<td>{{ i.Team1}} VS {{ i.Team2}}</td>
-				<td>{{ i.Schedule_time}}</td>
+				<td>{{ i.Schedule_time }}</td>
 				<td>{{ i.Winning_status}}</td>
+				<td><a href="#">Edit</a> | <a href="{% url 'schedule' %}?id={{i.id}}&Actions=Delete">Delete</a></td>
 			</tr>
 		{%endfor%}
 		</tbody>

@@ -1,7 +1,7 @@
 # views.py
 from django.shortcuts import render, redirect
 # from .forms import Accounts
-from .forms import RegisterForm, TeamRegisterForm
+from .forms import RegisterForm, TeamRegisterForm, scheduleForm
 from .models import TeamRegister, UserProfile,Schedule
 
 # Create your views here.
@@ -19,9 +19,26 @@ def feesummary(response):
     return render(response, "feesummary.html", {"team_qury":team_qury,"total_fee":total_fee})
 
 def schedule(response):
-    team_qury = TeamRegister.objects.all()
+    teams_list = TeamRegister.objects.filter(Team_fee__gte=500)
     schedule_list = Schedule.objects.all()
-    return render(response, "schedule.html", {"teamnames":team_qury,'schedule_list':schedule_list})
+    team_qury = TeamRegister.objects.all()
+    scheduled_list = []
+    for i in schedule_list:
+        scheduled_list.append(i.Team1)
+        scheduled_list.append(i.Team2)
+    not_scheduled_list = []
+    for i in teams_list:
+        if i.Team_title in scheduled_list:
+            pass
+        else:
+            not_scheduled_list.append(i.Team_title)
+    if response.POST:
+        Schedule.objects.create(Team1 = response.POST['team1'], Team2 = response.POST['team2'], Schedule_time = response.POST['datetime'])
+        return redirect("/schedule")
+    if response.GET and response.GET['Actions'] == 'Delete':
+        Schedule.objects.filter(id = response.GET['id']).delete()
+        return redirect("/schedule")
+    return render(response, "schedule.html", {"teamnames":team_qury,'schedule_list':schedule_list,'not_scheduled_list':not_scheduled_list})
 
 def player_list(response):
     player_list = UserProfile.objects.all()
