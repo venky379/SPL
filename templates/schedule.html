@@ -19,7 +19,7 @@
 	<div class="row">
 		<div class="col-md-3 col-lg-3 col-sm-12">
 			<div>Team1</div>
-			<select name="team1" id="team1"style='width: 300;height: 40'>
+			<select name="team1" id="team1"style='width: 100%;height: 40'>
 			    <option value="volvo"selected>Select Team</option>
 			    {% for i in not_scheduled_list%}
 				    <option value={{i}}>{{i}}</option>
@@ -28,7 +28,7 @@
 		</div>
 		<div class="col-md-3 col-lg-3 col-sm-12">
 			<div>Team2</div>
-			<select name="team2" id="team2"style='width: 300;height: 40'>
+			<select name="team2" id="team2"style='width: 100%;height: 40'>
 			    <option value="volvo"selected>Select Team</option>
 			    {% for i in not_scheduled_list%}
 				    <option value={{i}}>{{i}}</option>
@@ -39,7 +39,7 @@
 		</div>
 		<div class="col-md-3 col-lg-3 col-sm-12">
 			<div>Timings</div>
-			<input name="datetime" id="datetime" type="datetime-local"style='width: 300;height: 40'>
+			<input name="datetime" id="datetime" type="datetime-local"style='width: 100%;height: 40'>
 		</div>
 		<div class="col-md-3 col-lg-3 col-sm-12"style="padding-top:30">
 			<input type="submit"class="btn btn-success">
