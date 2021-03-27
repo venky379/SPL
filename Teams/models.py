@@ -30,3 +30,14 @@ def __str__(self):
 #     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 #     choice_text = models.CharField(max_length=200)
 #     votes = models.IntegerField(default=0)
+
+class Schedule(models.Model):
+    Team1 = models.CharField(max_length=200)
+    Team2 = models.CharField(max_length=200)
+    Winning_status = models.CharField(max_length=200,null=False,blank=True,default='')
+    Schedule_time = models.CharField(max_length=200,null=False,blank=True,default='')
+    # Wicket_keeper = models.BooleanField(default=False)
+
+def __str__(self):
+        """String for representing the MyModelName object (in Admin site etc.)."""
+        return self.Team1

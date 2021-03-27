@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 # from .forms import Accounts
 from .forms import RegisterForm, TeamRegisterForm
-from .models import TeamRegister, UserProfile
+from .models import TeamRegister, UserProfile,Schedule
 
 # Create your views here.
 def home(response):
@@ -17,6 +17,16 @@ def feesummary(response):
     for i in team_qury:
         total_fee += int(i.Team_fee)
     return render(response, "feesummary.html", {"team_qury":team_qury,"total_fee":total_fee})
+
+def schedule(response):
+    team_qury = TeamRegister.objects.all()
+    schedule_list = Schedule.objects.all()
+    return render(response, "schedule.html", {"teamnames":team_qury,'schedule_list':schedule_list})
+
+def player_list(response):
+    player_list = UserProfile.objects.all()
+    team_qury = TeamRegister.objects.all()
+    return render(response, "player_list.html", {"player_list":player_list,"teamnames":team_qury,})
 
 
 def team_register(response):

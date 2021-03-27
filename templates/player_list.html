@@ -1,0 +1,38 @@
+{% extends "base1.html" %}
+{% load crispy_forms_tags %}
+{% block list %}
+<h1>Teams List</h1>
+		<table class="table table-striped">
+		{% for i in teamnames %}
+			    <thead>
+			      <tr>
+			        <th>{{ forloop.counter }}. {{i.Team_title|title}}</th>
+			      </tr>
+			    </thead>  
+		{%endfor%}
+	</table>
+		
+{% endblock %}
+{% block form %}
+	<h1>Players List</h1>
+		<table class="table table-striped">
+			    <thead>
+			      <tr>
+			        <th>Sl no.</th>
+			        <th>Player Name</th>
+			        <th>Aadhar Number</th>
+			        <th>Team Name</th>
+			      </tr>
+			    </thead>  
+		<tbody>
+		{% for i in player_list %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ i.Username}}</td>
+				<td>{{ i.AadhaarNo}}</td>
+				<td>{{ i.play_to}}</td>
+			</tr>
+		{%endfor%}
+		</tbody>
+	</table>		
+{% endblock %}

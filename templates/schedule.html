@@ -1,0 +1,43 @@
+{% extends "base1.html" %}
+{% load crispy_forms_tags %}
+{% block list %}
+		<h1>Teams List</h1>
+		<table class="table table-striped">
+		{% for i in teamnames %}
+			    <thead>
+			      <tr>
+			        <th>{{ forloop.counter }}. {{i.Team_title|title}}</th>
+			      </tr>
+			    </thead>  
+		{%endfor%}
+	</table>
+{% endblock %}
+{% block form %}
+<div class="row">
+	<div class="col-12"style="text-align: right;padding-right: 20;margin-top: 10">
+		<a href="#"class="btn btn-success">&#43; Create User</a>
+	</div>
+</div>
+<h1>Schedule</h1>
+		<table class="table table-striped">
+			    <thead>
+			      <tr>
+			        <th>Sl no.</th>
+			        <th>Vs</th>
+			        <th>Date and Time</th>
+			        <th>Winning Status</th>
+			      </tr>
+			    </thead>  
+		<tbody>
+		{% for i in schedule_list %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ i.Team1}} VS {{ i.Team2}}</td>
+				<td>{{ i.Schedule_time}}</td>
+				<td>{{ i.Winning_status}}</td>
+			</tr>
+		{%endfor%}
+		</tbody>
+	</table>
+		
+{% endblock %}
